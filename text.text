@@ -1,0 +1,4 @@
+src folder er moddhe 
+  1. Layout folder        2. Pages folder           3. Router folder
+    1. Main.js              1. shared folder           1.Routes folder 
+                            2. Home.js                     1. Routes.js
