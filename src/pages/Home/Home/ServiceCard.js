@@ -3,6 +3,7 @@ import React from 'react'
 const ServiceCard = ({ serve }) => {
 
     const { img, title, price } = serve;
+    console.log(title);
     return (
         <div>
             <div className="card card-compact w-90 bg-base-100 shadow-xl">
