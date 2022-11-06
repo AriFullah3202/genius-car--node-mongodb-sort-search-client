@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 
-const OrderRow = ({ order, handleDelete }) => {
+const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
     console.log()
-    const { _id, serviceName, price, customer, phone, service } = order;
+    const { _id, serviceName, price, customer, phone, service, status } = order;
     const [orderService, setOrderService] = useState({})
     useEffect(() => {
         fetch(`http://localhost:5000/service/${service}`)
@@ -43,7 +43,7 @@ const OrderRow = ({ order, handleDelete }) => {
             </td>
             <td>Red</td>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+                <button onClick={() => handleStatusUpdate(_id)} className="btn btn-ghost btn-xs">{status ? status : 'Panding'}</button>
             </th>
         </tr>
     )

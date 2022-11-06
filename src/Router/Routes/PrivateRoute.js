@@ -5,7 +5,7 @@ import { useLocation, Navigate } from 'react-router';
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
     const location = useLocation();
-    // 
+    // ekhane spenner dekahbo
     if (loading) {
         return <h1 className='text-5xl'> Loading</h1>
     }
