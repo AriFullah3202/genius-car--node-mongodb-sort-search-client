@@ -18,6 +18,7 @@ const Header = () => {
                 user ?.uid ?
                     <>
                         <Link onClick={handleLogOut}>Logout</Link>
+                        <Link to= "/orders">Order</Link>
                         <Link>{user ?.displayName}</Link>
                     </>
                     : <Link to="/Login">Login</Link>

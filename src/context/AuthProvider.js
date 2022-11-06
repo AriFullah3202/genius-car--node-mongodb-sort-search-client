@@ -20,9 +20,11 @@ const AuthProvider = ({ children }) => {
 
 
     const createUser = (email, password) => {
+        setLoding(true)
         return createUserWithEmailAndPassword(auth, email, password);
     }
     const login = (email, password) => {
+        setLoding(true)
         return signInWithEmailAndPassword(auth, email, password);
     }
     const logOut = () => {
@@ -33,6 +35,7 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             console.log(currentUser)
             setUser(currentUser)
+            setLoding(false)
         })
         // eita kali kore de
         return () => {
