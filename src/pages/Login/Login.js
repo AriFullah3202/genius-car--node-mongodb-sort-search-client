@@ -16,7 +16,30 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         login(email, password)
-            .then(result => { navigate(from) })
+            .then(result => {
+                const user = result.user;
+                const currentUser = {
+                    email: user.email
+                }
+                console.log(currentUser)
+
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'Application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        localStorage.setItem('token', data.token)
+                    })
+                    .catch(err => console.log(err))
+
+                navigate(from)
+
+            })
             .catch(err => console.log(err))
 
     }

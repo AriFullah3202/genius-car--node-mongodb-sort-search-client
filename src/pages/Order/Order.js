@@ -1,12 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../../context/AuthProvider';
 import OrderRow from './OrderRow';
+import { longStackSupport } from 'q';
 
 const Order = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     const [order, setOrder] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/orders?email=${user ?.email}`)
+        fetch(`http://localhost:5000/orders?email=${user ?.email}`, {
+            //get token form localStorage    
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setOrder(data)
@@ -19,7 +25,12 @@ const Order = () => {
             fetch(`http://localhost:5000/orders/${_id}`, {
                 method: 'DELETE'
             })
-                .then(res => res.json())
+                .then(res => {
+                    res.json()
+                    if (res.status === 401 || res.status === 403) {
+                        logOut()
+                    }
+                })
                 .then(data => {
                     if (data.deletedCount > 0) {
                         alert('deleted count successfully')

@@ -12,5 +12,35 @@ src folder er moddhe 4 ta folder
 control + d = select kore ei command ekbar ekbar dile sob select hbe
 control  sift + l = ekta select kore ei command dile sob select hbe  
 
+for jwt token send email address to http://localhost:5000/jwt
+                const user = result.user;
+                const currentUser = {
+                    email: user.email
+                }
+                console.log(currentUser)
+
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    herders: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+Note : this code is use for Login function when is successfull
+Note : jwt asar karon hocche user k secure kora
+Example :   useEffect(() => {
+        fetch(`http://localhost:5000/orders?email=${user ?.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                setOrder(data)
+                console.log(data)
+            })
+    }, [user ?.email])
+Note : headers er moddhe Bearer ei name chara onno kichu name dite pi
+
 
 
