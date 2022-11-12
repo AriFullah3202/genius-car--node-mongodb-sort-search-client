@@ -4,20 +4,26 @@ import ServiceCard from './ServiceCard';
 const Service = () => {
     const [service, setService] = useState([]);
     const [isAse, setIsAse] = useState(true);
+    const [search, setSearch] = useState();
     const searchRef = useRef();
     // search hocche sorasori value k amra pacch
+    // ekhane aro onek query parameter dite parbo and state , and dependency dite hbe
+
+    // fetch(`http://localhost:5000/services?search=${search}&order=${isAse ? 'asc' : 'dese'}`)
+    // remember ekhadik parametre er modhe & symbol dite hbe
+
     useEffect(() => {
-        fetch(`http://localhost:5000/services?order=${isAse ? 'asc' : 'dese'}`)
+        fetch(`http://localhost:5000/services?search=${search}&order=${isAse ? 'asc' : 'dese'}`)
             .then(res => res.json())
             .then(data => {
                 setService(data)
                 console.log(data)
 
             })
-    }, [isAse])
+    }, [isAse, search])
 
     const handleSearch = () => {
-        console.log(searchRef.current.value)
+        setSearch(searchRef.current.value)
     }
     return (
         <>
@@ -25,7 +31,7 @@ const Service = () => {
                 <p className="text-2xl font-bold text-orange-600">Services</p>
                 <h2 className="text-5xl font-semibold">Our Service Area</h2>
                 <input className="input input-sm" ref={searchRef} type="text" />
-                <button onClick={handleSearch}>Search</button>
+                <button className="btn" onClick={handleSearch}>Search</button>
                 <button className='btn' onClick={() => setIsAse(!isAse)}>{isAse ? 'desc' : 'asc'}</button>
             </div>
             <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
